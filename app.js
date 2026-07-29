@@ -39,11 +39,22 @@ document.querySelectorAll('.rev').forEach(el=>io.observe(el));
 const fbar=document.querySelector('.filters');
 if(fbar){
   const items=[...document.querySelectorAll('.proj-item')];
+  const OUT=320, STAGGER=45;
   fbar.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+    if(b.classList.contains('on'))return;
     fbar.querySelectorAll('button').forEach(x=>x.classList.remove('on'));
     b.classList.add('on');
     const f=b.dataset.f;
-    items.forEach(it=>{it.style.display=(f==='all'||it.dataset.cat===f)?'':'none'});
+    const match=it=>f==='all'||it.dataset.cat===f;
+    const toHide=items.filter(it=>it.style.display!=='none'&&!match(it));
+    toHide.forEach(it=>it.classList.add('f-out'));
+    setTimeout(()=>{
+      const toShow=items.filter(match);
+      items.forEach(it=>{it.style.display=match(it)?'':'none';it.classList.remove('f-out')});
+      toShow.forEach(it=>it.classList.add('f-in'));
+      void fbar.offsetHeight;
+      toShow.forEach((it,i)=>setTimeout(()=>it.classList.remove('f-in'),20+i*STAGGER));
+    }, toHide.length?OUT:0);
   });
 }
 
