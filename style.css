@@ -108,7 +108,8 @@ h1,h2,h3,h4{font-weight:300;line-height:1.04;letter-spacing:.005em}
 .sec-h h2{font-size:clamp(1.9rem,3.6vw,3.2rem);font-weight:300;text-transform:uppercase;letter-spacing:.02em}
 
 /* collections / grid with caption BELOW */
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;transition:opacity .28s var(--ease)}
+.grid3.fading{opacity:0}
 .tile{cursor:pointer}
 .tile .ph{position:relative;overflow:hidden;aspect-ratio:4/5;background:#e4e2df}
 /* .ph-in je viši od okvira - JS ga pomiče okomito prema scrollu (parallax/3D dojam), dok hover-zoom ide na img zasebno */
@@ -120,10 +121,6 @@ h1,h2,h3,h4{font-weight:300;line-height:1.04;letter-spacing:.005em}
 .tile .cap .n{font-size:12px;color:var(--muted);letter-spacing:.1em}
 .tile .cap .pl{font-size:16px;transition:transform .4s var(--ease)}
 .tile:hover .cap .pl{transform:translateX(6px)}
-/* prijelaz kod filtriranja projekata */
-.proj-item{transition:opacity .4s var(--ease),transform .4s var(--ease)}
-.proj-item.f-out{opacity:0;transform:scale(.96) translateY(10px);pointer-events:none}
-.proj-item.f-in{opacity:0;transform:translateY(18px)}
 
 /* project tiles: hover affordance signalling "open" */
 .proj-item .ph{position:relative}
